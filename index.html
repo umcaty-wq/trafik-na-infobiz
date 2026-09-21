@@ -340,10 +340,15 @@ nav {
   gap: 0;
 }
 .case-card {
-  border: 1.5px solid #0D0D0D;
+  border-top: 1.5px solid #0D0D0D;
+  border-left: 1.5px solid #0D0D0D;
+  border-right: none;
+  border-bottom: none;
   overflow: hidden;
   position: relative;
 }
+.cases-grid .case-card:nth-child(2n) { border-right: 1.5px solid #0D0D0D; }
+.cases-grid .case-card:nth-last-child(-n+2) { border-bottom: 1.5px solid #0D0D0D; }
 .case-id {
   position: absolute;
   top: 12px;
@@ -353,6 +358,10 @@ nav {
   font-size: 10px;
   letter-spacing: 0.04em;
   padding: 3px 8px;
+  width: 102px;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
   background: rgba(13,13,13,0.55);
   color: #fff;
   border-radius: 20px;
@@ -1024,6 +1033,37 @@ nav {
   transition: background 0.15s;
 }
 .cta-btn:hover { background: var(--pink); }
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  padding: 10px 16px;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.sticky-cta-btn {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  background: var(--pink);
+  color: #0D0D0D;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+body { padding-bottom: 66px; }
 .cta-note {
   font-size: 12px;
   color: var(--gray);
@@ -1072,6 +1112,8 @@ footer {
   .stats-bar-4 > div > div:first-child { font-size: 17px !important; }
   .stats-bar-4 > div > div:last-child { font-size: 8.5px !important; margin-top: 3px !important; }
   .cases-grid { grid-template-columns: 1fr; }
+  .cases-grid .case-card { border-right: 1.5px solid #0D0D0D !important; border-bottom: none !important; }
+  .cases-grid .case-card:last-child { border-bottom: 1.5px solid #0D0D0D !important; }
   .cases-grid img { height: 220px; }
   #results-track > div { flex: 0 0 100% !important; }
   .rc-body { padding: 14px !important; }
@@ -1100,6 +1142,29 @@ footer {
   .summary-s { padding: 60px 20px; }
   .cta-s { padding: 60px 20px; }
   footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+
+  /* SECTION 02 — почему не работает: smaller type + tighter spacing */
+  .split-title { font-size: 22px !important; }
+  .split > div:first-child p { font-size: 13px !important; margin-top: 16px !important; }
+  .bad-item { padding: 16px 0 !important; gap: 12px !important; }
+  .bad-x { font-size: 14px !important; }
+  .bad-text { font-size: 13px !important; line-height: 1.55 !important; }
+
+  /* SECTION 04 — что делаю я: smaller type + tighter spacing */
+  .whatido-grid { padding: 24px 16px !important; gap: 24px !important; }
+  .whatido-quote-text p { font-size: 13px !important; line-height: 1.6 !important; }
+  .pillar-item { padding: 16px 0 !important; }
+  .pillar-item:first-child { padding-top: 20px !important; }
+  .pillar-n { width: 24px !important; height: 24px !important; font-size: 9px !important; }
+  .pillar-t { font-size: 14px !important; }
+  .pillar-b { font-size: 13px !important; line-height: 1.55 !important; padding-left: 0 !important; margin-top: 8px !important; }
+
+  /* SUMMARY — вывод: smaller type + tighter spacing */
+  .summary-s { padding: 40px 20px !important; }
+  .summary-label { margin-bottom: 18px !important; }
+  .summary-text { font-size: 15px !important; line-height: 1.5 !important; }
+  .summary-text br + br { display: none; }
+  .summary-quote { font-size: 19px !important; margin-top: 24px !important; padding-top: 20px !important; }
 }
 </style>
 </head>
@@ -1465,7 +1530,7 @@ footer {
     <div class="whatido-photo-quote">
       <div class="whatido-quote-text" style="padding-left:16px; border-left:3px solid #FF2D78;">
         <p style="font-size:14px; font-weight:400; color:#111111; line-height:1.7; margin:0;">я не работаю по методичке с курса, я не спрашиваю у GPT почему заблокировали кабинет.<br><br>за 3.5 года я выстроила собственную систему — при интеграции этой системы ваш бизнес будет давать ×× без просадок и слива бюджета</p>
-        <p style="font-size:13px; font-weight:700; color:#FF2D78; margin:12px 0 0; letter-spacing:0.02em; text-transform:uppercase; display:flex; align-items:center;">и вот почему <span class="arrow-chip">→</span></p>
+        <p id="expand-all-pillars" style="font-size:13px; font-weight:700; color:#FF2D78; margin:12px 0 0; letter-spacing:0.02em; text-transform:uppercase; display:flex; align-items:center; cursor:pointer; -webkit-tap-highlight-color:transparent; width:fit-content;">и вот почему <span class="arrow-chip">→</span></p>
       </div>
     </div>
 
@@ -1522,6 +1587,18 @@ footer {
 
   </div>
 </section>
+
+<script>
+  (function() {
+    var trigger = document.getElementById('expand-all-pillars');
+    if (!trigger) return;
+    trigger.addEventListener('click', function() {
+      document.querySelectorAll('.pillars .pillar-item').forEach(function(item) {
+        item.open = true;
+      });
+    });
+  })();
+</script>
 
 <!-- ANGLES / CAROUSEL -->
 <section class="s">
@@ -1816,7 +1893,7 @@ footer {
 </div>
 
 <!-- CTA -->
-<section class="cta-s">
+<section class="cta-s" id="cta-section">
   <div class="glow-blob" style="width:380px; height:380px; background:var(--pink); opacity:0.18; top:-120px; left:0;"></div>
   <div class="glow-blob" style="width:340px; height:340px; background:var(--pink); opacity:0.16; bottom:-140px; right:5%;"></div>
   <div>
@@ -1873,6 +1950,10 @@ footer {
   <div class="footer-brand">Kotova Ads</div>
   <div class="footer-note">Meta Ads · Telegram Ads · Инфобизнес · 2026</div>
 </footer>
+
+<div class="sticky-cta">
+  <a href="#cta-section" class="sticky-cta-btn">оставить заявку</a>
+</div>
 
 </body>
 </html>
