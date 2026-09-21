@@ -1070,6 +1070,15 @@ nav {
   background: rgba(13,13,13,0.92);
   backdrop-filter: blur(6px);
   border-top: 1px solid rgba(255,255,255,0.12);
+  opacity: 0;
+  transform: translateY(100%);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.sticky-cta.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .sticky-cta-btn {
   display: block;
@@ -1139,8 +1148,8 @@ footer {
 
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
-  .hero { aspect-ratio: 0.72; min-height: 0; }
-  .hero-photo img { object-fit: cover !important; object-position: center top !important; transform: scale(1.08); transform-origin: center 10%; }
+  .hero { aspect-ratio: 0.85; min-height: 0; }
+  .hero-photo img { object-fit: cover !important; object-position: center 12% !important; }
   .hero-bottom { grid-template-columns: 1fr auto; align-items: end; background: linear-gradient(0deg, rgba(242,240,235,0.98) 0%, rgba(242,240,235,0.98) 40%, rgba(242,240,235,0.0) 100%); padding: 16px 16px 18px; gap: 12px; }
   .hero-title { font-size: clamp(22px, 6.5vw, 34px); }
   .hero-stats-grid { min-width: 0; width: auto; }
@@ -2013,9 +2022,22 @@ footer {
   <div class="footer-note">Meta Ads · Telegram Ads · Инфобизнес · 2026</div>
 </footer>
 
-<div class="sticky-cta">
+<div class="sticky-cta" id="sticky-cta">
   <a href="#cta-section" class="sticky-cta-btn">оставить заявку</a>
 </div>
+<script>
+  (function() {
+    var bar = document.getElementById('sticky-cta');
+    var marquee = document.querySelector('.marquee-wrap');
+    if (!bar || !marquee) return;
+    function toggle() {
+      bar.classList.toggle('visible', window.scrollY > 30);
+    }
+    toggle();
+    window.addEventListener('scroll', toggle, {passive:true});
+    window.addEventListener('resize', toggle);
+  })();
+</script>
 
 <div id="img-lightbox" class="img-lightbox-overlay" onclick="closeLightbox()">
   <img id="img-lightbox-img" src="" alt="">
