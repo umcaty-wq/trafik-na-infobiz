@@ -1148,10 +1148,8 @@ footer {
 
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
-  .hero-screen { display: flex; flex-direction: column; min-height: calc(100vh - 63px); min-height: calc(100dvh - 63px); }
-  .hero-spacer { flex: 1 1 auto; min-height: 0; background: var(--bg); }
-  .hero { aspect-ratio: 0.78; min-height: 0; flex-shrink: 0; }
-  .marquee-wrap { padding: 14px 0; flex-shrink: 0; }
+  .hero { aspect-ratio: 0.78; min-height: 0; }
+  .marquee-wrap { padding: 14px 0; }
   .marquee-item { font-size: 11px !important; }
   .hero-photo img { object-fit: cover !important; object-position: center 12% !important; }
   .hero-bottom { grid-template-columns: 1fr auto; align-items: end; background: linear-gradient(0deg, rgba(242,240,235,0.98) 0%, rgba(242,240,235,0.98) 40%, rgba(242,240,235,0.0) 100%); padding: 10px 12px 12px; gap: 8px; }
@@ -1233,7 +1231,6 @@ footer {
   </symbol>
 </svg>
 
-<div class="hero-screen">
 <nav>
   <div class="nav-brand">Kotova Ads</div>
   <div class="nav-tag">Meta Ads · Telegram Ads · Инфобиз</div>
@@ -1273,8 +1270,6 @@ footer {
   </div>
 </section>
 
-<div class="hero-spacer"></div>
-
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
@@ -1291,7 +1286,6 @@ footer {
     <div class="marquee-item">39 лидов за $296<span class="sep">×</span></div>
     <div class="marquee-item">ROAS 3.6×<span class="sep">×</span></div>
   </div>
-</div>
 </div>
 
 <!-- RESULTS -->
