@@ -2022,22 +2022,9 @@ footer {
   <div class="footer-note">Meta Ads · Telegram Ads · Инфобизнес · 2026</div>
 </footer>
 
-<div class="sticky-cta" id="sticky-cta">
+<div class="sticky-cta visible" id="sticky-cta">
   <a href="#cta-section" class="sticky-cta-btn">оставить заявку</a>
 </div>
-<script>
-  (function() {
-    var bar = document.getElementById('sticky-cta');
-    var marquee = document.querySelector('.marquee-wrap');
-    if (!bar || !marquee) return;
-    function toggle() {
-      bar.classList.toggle('visible', window.scrollY > 30);
-    }
-    toggle();
-    window.addEventListener('scroll', toggle, {passive:true});
-    window.addEventListener('resize', toggle);
-  })();
-</script>
 
 <div id="img-lightbox" class="img-lightbox-overlay" onclick="closeLightbox()">
   <img id="img-lightbox-img" src="" alt="">
